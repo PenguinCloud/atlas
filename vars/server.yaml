@@ -1,0 +1,22 @@
+---
+cluster:
+  ip: 108.61.229.5
+  port: 6443
+  fqdn: cluster.penguinzmedia.group
+db:
+  ip: 66.42.116.45
+  port: 3306
+k3s:
+  config: /etc/rancher/k3s/k3s.yaml
+  user:
+    config: /root/.kube/config/k3s.yaml
+  username: pmgk3s
+  password: WhiskeyTiskeyMiskey
+  db:
+    user: pmgk3s
+    name: pmgk3s
+    pass: 0XC2b6Nqdfyo887xJ860qVb
+admin:
+  email: justin@penguinzmedia.group
+rancher:
+  port: 443

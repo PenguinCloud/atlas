@@ -1,0 +1,8 @@
+- name: Checking connection to Rancher
+  uri:
+    url: "https://127.0.0.1:{{ rancher.port }}"
+    validate_certs: no
+  register: result
+  until: result.status == 200
+  retries: 5
+  delay: 60

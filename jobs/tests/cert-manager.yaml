@@ -1,0 +1,11 @@
+---
+- name: Get a list of all pods from cert-manager install
+  command: "kubectl get pods --namespace cert-manager"
+  register: pod_list
+  environment:
+    KUBECONFIG: "{{ k3s.user.config }}"
+- name: Add more wait time for cert-manager pods
+  pause:
+    minutes: 2
+  until: pod_list.stdout.find('Running') >= 3
+  when: pod_list.stdout.find('Running') < 3 

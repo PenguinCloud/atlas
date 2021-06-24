@@ -1,0 +1,4 @@
+---
+- name: Run Install Script for K3s
+  script: './k3s-install.sh server -datastore-endpoint="mysql://{{ k3s.db.user }}:{{ k3s.db.pass }}@tcp({{ db.ip}}:{{ db.port }})/{{ k3s.db.name }}"'
+

@@ -1,0 +1,19 @@
+---
+- name: Update system
+  apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+- name: Install components
+  apt:
+    pkg:
+      - vim
+      - nano
+      - net-tools
+      - docker.io
+      - unzip
+      - curl
+      - apt-transport-https
+      - ca-certificates
+      - containerd
+      - cron
