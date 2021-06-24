@@ -18,10 +18,10 @@
       include_tasks: jobs/configure/kubectl.yaml
     - name: Test K3s
       include_tasks: jobs/tests/k3s.yaml
-    - name: Install Cert Manager
-      include_tasks: jobs/install/cert-manager.yaml
-    - name: Test Cert Manager
-      include_tasks: jobs/tests/cert-manager.yaml
+    #- name: Install Cert Manager
+    #  include_tasks: jobs/install/cert-manager.yaml
+    #- name: Test Cert Manager
+    #  include_tasks: jobs/tests/cert-manager.yaml
     - name: Install Rancher
       include_tasks: jobs/install/rancher.yaml
     - name: Test Rancher
