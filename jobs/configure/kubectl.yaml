@@ -16,3 +16,8 @@
     line: "    password: {{ k3s.password }}"
     regexp: "^( )*password:"
     create: yes
+- name: Change config permissions
+  file:
+    path: "{{ k3s.user.config }}"
+    mode: 700
+    state: directory
