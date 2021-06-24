@@ -1,0 +1,27 @@
+- name: Install key
+  ansible.builtin.apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    state: present
+- name: Install Source Repo
+  ansible.builtin.apt_repository:
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: present
+- name: Update System with new Repo
+  apt:
+    update_cache: yes
+    name: "*"
+    state: latest
+- name: Install kubectl
+  apt:
+    name: kubectl
+    state: latest
+- name: Make user kube config folder
+  ansible.builtin.file:
+    path: /root/.kube/config
+    state: directory
+    mode: '0755'
+- name: Copy Kube Config
+  ansible.builtin.copy:
+    src:  "{{ k3s.config }}"
+    dest: "{{ k3s.user.config }}"
+

@@ -1,0 +1,13 @@
+---
+- name: Deploy latest version of Cert Manager chart inside cert-manager namespace (and create it)
+  community.kubernetes.helm:
+    name: cert-manager
+    chart_ref: jetstack/cert-manager
+    release_namespace: cert-manager
+    create_namespace: yes
+    release_state: present
+    update_repo_cache: yes
+    wait: yes
+  environment:
+    KUBECONFIG: "{{ k3s.user.config }}"
+

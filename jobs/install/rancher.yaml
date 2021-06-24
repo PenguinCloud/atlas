@@ -1,0 +1,13 @@
+- name: Deploy latest version of Rancher into the cattle-system namespace
+  community.kubernetes.helm:
+    name: rancher
+    chart_ref: rancher-stable/rancher
+    release_namespace: cattle-system
+    create_namespace: yes
+    release_state: present
+    update_repo_cache: yes
+    wait: yes
+    values:
+      hostname: "{{ cluster.fqdn }}"
+  environment:
+    KUBECONFIG: "{{ k3s.user.config }}"

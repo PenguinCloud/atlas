@@ -1,0 +1,16 @@
+---
+- name: Get a list of all pods from install
+  command: "kubectl get nodes"
+  register: node_list
+  environment:
+    KUBECONFIG: "{{ k3s.user.config }}"
+- name: Add more wait time for Nodes
+  pause:
+    minutes: 5
+  until: node_list.stdout.find('Ready') > 0 
+  when: node_list.stdout.find('Ready') == 0 
+- name: Checking connection to k3s
+  uri:
+    url: https://127.0.0.1:{{ cluster.port }}
+    validate_certs: no
+    status_code: [200, 401]
