@@ -18,7 +18,15 @@
     cmd: "helm repo update"
   tags:
     - rancher
-- name: install helm
+- name: create rancher namespace
+  community.kubernetes.k8s:
+    name: cattle-system
+    api_version: v1
+    kind: Namespace
+    kubeconfig: /root/.kube/config
+    state: present
+
+- name: install rancher chart
   block:
     - name: try fresh install
       shell: 
