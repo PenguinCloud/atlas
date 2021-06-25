@@ -1,6 +1,7 @@
 #!/bin/bash
 apt install python3 python3-pip -y
 pip3 install ansible openshift
+mkdir -p /etc/ansible
 FILE=/etc/ansible/hosts
 if test -f "$FILE"; then
     echo "$FILE exists, skipping setup."
