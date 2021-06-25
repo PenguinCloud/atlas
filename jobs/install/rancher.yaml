@@ -9,5 +9,4 @@
     wait: yes
     values:
       hostname: "{{ cluster.fqdn }}"
-  environment:
-    KUBECONFIG: "{{ k3s.user.config }}"
+
