@@ -25,5 +25,8 @@
     state: file
     mode: '0700'
 - name: Make KUBECONFIG work
-  command: export KUBECONFIG="/root/.kube/config"
+  shell: 
+    cmd: export KUBECONFIG="/root/.kube/config"
+  args:
+    executable: /bin/bash
 
