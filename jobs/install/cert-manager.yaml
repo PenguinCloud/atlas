@@ -1,4 +1,10 @@
 ---
+- name: Make user kube config only for root's eyes
+  ansible.builtin.file:
+    path: /root/.kube/config
+    state: file
+    mode: '0700'
+
 - name: install CRDs
   community.kubernetes.k8s:
     state: present
