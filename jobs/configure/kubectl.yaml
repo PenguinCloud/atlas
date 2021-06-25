@@ -20,3 +20,5 @@
   file:
     path: "{{ k3s.user.config }}"
     mode: 700
+    owner: root
+    group: root

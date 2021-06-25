@@ -1,13 +1,50 @@
 ---
-- name: Deploy latest version of Cert Manager chart inside cert-manager namespace (and create it)
-  community.kubernetes.helm:
+- name: Make user kube config only for root's eyes
+  ansible.builtin.file:
+    path: /root/.kube/config
+    state: file
+    mode: '0700'
+- name: install CRDs
+  community.kubernetes.k8s:
+    state: present
+    src: "{{ playbook_dir }}/cert-manager.crds.yaml"
+    validate_certs: no
+#- name: Deploy latest version of Cert Manager chart inside cert-manager namespace (and create it)
+#  community.kubernetes.helm:
+#    name: cert-manager
+#    chart_ref: jetstack/cert-manager
+#    validate_certs: no
+#    release_namespace: cert-manager
+#    create_namespace: yes
+#    release_state: present
+#    skip_crds: no
+#    update_repo_cache: yes
+#    wait: yes
+#    chart_version: 1.0.4
+- name: create namespace
+  community.kubernetes.k8s:
     name: cert-manager
-    chart_ref: jetstack/cert-manager
-    release_namespace: cert-manager
-    create_namespace: yes
-    release_state: present
-    update_repo_cache: yes
-    wait: yes
-  environment:
-    KUBECONFIG: "{{ k3s.user.config }}"
-
+    api_version: v1
+    kind: Namespace
+    kubeconfig: /root/.kube/config
+    state: present
+- name: update repos
+  shell:
+    cmd: "helm repo update"
+- name: install helm
+  block:
+    - name: try fresh install
+      shell: 
+        cmd: helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
+  rescue:
+    - name: Assume prior installed and try an upgrade install
+      shell: 
+        cmd: helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
+- name: wait for install to  complete
+  command: "kubectl get pods --namespace cert-manager "
+  register: pod_list 
+- name: Add more wait time for pods to complete install
+  pause:
+    minutes: 1
+  until: pod_list.stdout.find('Running') > 2 
+  when: pod_list.stdout.find('Running') < 3 

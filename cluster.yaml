@@ -20,9 +20,17 @@
       include_tasks: jobs/tests/k3s.yaml
     - name: Install Cert Manager
       include_tasks: jobs/install/cert-manager.yaml
+      tags:
+        - cert-manager
     - name: Test Cert Manager
       include_tasks: jobs/tests/cert-manager.yaml
+      tags:
+        - cert-manager
     - name: Install Rancher
       include_tasks: jobs/install/rancher.yaml
+      tags:
+        - rancher
     - name: Test Rancher
       include_tasks: jobs/tests/rancher.yaml
+      tags:
+        - rancher

@@ -1,4 +1,12 @@
 ---
+- name: Check is K3s already installed
+  ignore_errors: yes
+  uri:
+    url: https://127.0.0.1:{{ cluster.port }}
+    validate_certs: no
+    status_code: [200, 401]
+  register: k3sstatus
 - name: Run Install Script for K3s
   script: './k3s-install.sh server -datastore-endpoint="mysql://{{ k3s.db.user }}:{{ k3s.db.pass }}@tcp({{ db.ip}}:{{ db.port }})/{{ k3s.db.name }}"'
+  when: k3sstatus.status != 200 and k3sstatus.status != 401
 
