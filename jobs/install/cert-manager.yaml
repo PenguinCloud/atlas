@@ -4,7 +4,6 @@
     path: /root/.kube/config
     state: file
     mode: '0700'
-
 - name: install CRDs
   community.kubernetes.k8s:
     state: present
@@ -34,11 +33,13 @@
     cmd: "helm repo update"
 - name: install helm
   block:
-    shell: 
-      cmd: helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
+    - name: try fresh install
+      shell: 
+        cmd: helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
   rescue:
-    shell: 
-      cmd: helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
+    - name: Assume prior installed and try an upgrade install
+      shell: 
+        cmd: helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
 - name: wait for install to  complete
   community.kubernetes.k8s_info:
     kind: Pod
@@ -49,4 +50,3 @@
     minutes: 2
   until: pod_list.stdout.find('Running') > 2 
   when: pod_list.stdout.find('Running') < 3 
-
