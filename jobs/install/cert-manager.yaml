@@ -4,8 +4,6 @@
     state: present
     src: "{{ playbook_dir }}/cert-manager.crds.yaml"
     validate_certs: no
-  environment:
-    KUBECONFIG: "{{ k3s.user.config }}"
 - name: Deploy latest version of Cert Manager chart inside cert-manager namespace (and create it)
   community.kubernetes.helm:
     name: cert-manager
@@ -18,6 +16,5 @@
     update_repo_cache: yes
     wait: yes
     chart_version: 1.0.4
-  environment:
-    KUBECONFIG: "{{ k3s.user.config }}"
+
 
