@@ -4,6 +4,9 @@
   register: node_list
   environment:
     KUBECONFIG: "{{ k3s.user.config }}"
+  retries: 3
+  delay: 2
+  until: node_list.rc == 0
 - name: Add more wait time for Nodes
   pause:
     minutes: 5
