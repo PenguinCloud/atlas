@@ -24,4 +24,6 @@
     path: /root/.kube/config
     state: file
     mode: '0700'
+- name: Make KUBECONFIG work
+  command: export KUBECONFIG="/root/.kube/config"
 
