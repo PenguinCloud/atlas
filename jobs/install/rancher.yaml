@@ -13,8 +13,7 @@
   shell:
     cmd: "helm repo update"
   tags:
-  - rancher
-
+    - rancher
 - name: install helm
   block:
     - name: try fresh install
