@@ -15,13 +15,13 @@
   apt:
     name: kubectl
     state: latest
-- name: Make user kube config folder
-  ansible.builtin.file:
-    path: /root/.kube/config
-    state: file
-    mode: '0700'
 - name: Copy Kube Config
   ansible.builtin.copy:
     src:  "{{ k3s.config }}"
     dest: "{{ k3s.user.config }}"
+- name: Make user kube config only for root's eyes
+  ansible.builtin.file:
+    path: /root/.kube/config
+    state: file
+    mode: '0700'
 
