@@ -27,7 +27,7 @@
   rescue:
     - name: Assume prior installed and try an upgrade install
       shell: 
-        cmd: helm upgrade --install rancher rancher-latest/rancher --namespace cattle-system --set hostname={{ cluster.fqdn }}"
+        cmd: "helm upgrade --install rancher rancher-latest/rancher --namespace cattle-system --set hostname={{ cluster.fqdn }}"
 - name: wait for install to  complete
   command: "kubectl -n cattle-system rollout status deploy/rancher"
   register: pod_list 
