@@ -9,7 +9,7 @@ db:
 k3s:
   config: /etc/rancher/k3s/k3s.yaml
   user:
-    config: /root/.kube/config/k3s.yaml
+    config: /root/.kube/config
   username: pmgk3s
   password: WhiskeyTiskeyMiskey
   db:
