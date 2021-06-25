@@ -9,6 +9,10 @@
 #    wait: yes
 #    values:
 #      hostname: "{{ cluster.fqdn }}"
+- name: Make sure repo is defined right
+  command: "helm repo add rancher-latest https://releases.rancher.com/server-charts/latest"
+  tags:
+    - rancher
 - name: update repos
   shell:
     cmd: "helm repo update"
