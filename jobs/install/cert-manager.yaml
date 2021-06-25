@@ -29,9 +29,16 @@
     kind: Namespace
     kubeconfig: /root/.kube/config
     state: present
+- name: update repos
+  shell:
+    cmd: "helm repo update"
 - name: install helm
-  shell: 
-    cmd: helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
+  block:
+    shell: 
+      cmd: helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
+  rescue:
+    shell: 
+      cmd: helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.4
 - name: wait for install to  complete
   community.kubernetes.k8s_info:
     kind: Pod
