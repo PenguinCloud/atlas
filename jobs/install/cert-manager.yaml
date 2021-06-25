@@ -2,7 +2,7 @@
 - name: install CRDs
   community.kubernetes.k8s:
     state: present
-    src: cert-manager.crds.yaml
+    src: "{{ playbook_dir }}/cert-manager.crds.yaml"
     validate_certs: no
   environment:
     KUBECONFIG: "{{ k3s.user.config }}"
