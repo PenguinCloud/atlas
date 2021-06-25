@@ -1,9 +1,6 @@
 #!/bin/bash
 apt install python3 python3-pip -y
-pip3 install ansible openshift pyyaml
-
-export KUBECONFIG=/root/.kube/config/k3s.yaml
-mkdir -p /etc/ansible
+pip3 install ansible openshift
 FILE=/etc/ansible/hosts
 if test -f "$FILE"; then
     echo "$FILE exists, skipping setup."
