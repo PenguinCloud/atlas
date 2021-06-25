@@ -1,13 +1,21 @@
 ---
+- name: install CRDs
+  community.kubernetes.k8s:
+    state: present
+    src: cert-manager.crds.yaml
+    validate_certs: no
 - name: Deploy latest version of Cert Manager chart inside cert-manager namespace (and create it)
   community.kubernetes.helm:
     name: cert-manager
     chart_ref: jetstack/cert-manager
+    validate_certs: no
     release_namespace: cert-manager
     create_namespace: yes
     release_state: present
+    skip_crds: no
     update_repo_cache: yes
     wait: yes
+    chart_version: 1.0.4
   environment:
     KUBECONFIG: "{{ k3s.user.config }}"
 
