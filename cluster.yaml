@@ -11,14 +11,17 @@
     - name: Install K3s
       include_tasks: jobs/install/k3s.yaml
       when: cluster.build == "k3s"
-    - name: Install Helm
-      include_tasks: jobs/install/helm.yaml
     - name: Install Kubectl
       include_tasks: jobs/install/kubectl.yaml
     - name: Configure Kubectl
       include_tasks: jobs/configure/kubectl.yaml
-    - name: Test K3s
-      include_tasks: jobs/tests/k3s.yaml
+    - name: Install k8s
+      include_tasks: jobs/install/k8s.yaml
+      when: cluster.build == "k8s"
+    - name: Test Kubernetess
+      include_tasks: jobs/tests/kubernetes.yaml
+    - name: Install Helm
+      include_tasks: jobs/install/helm.yaml
     - name: Install Cert Manager
       include_tasks: jobs/install/cert-manager.yaml
       tags:
