@@ -12,8 +12,8 @@
     minutes: 5
   until: node_list.stdout.find('Ready') > 0 
   when: node_list.stdout.find('Ready') == 0 
-- name: Checking connection to k3s
+- name: Checking connection to kubernetes
   uri:
-    url: https://127.0.0.1:{{ cluster.port }}
+    url: https://{{ cluster.fqdn }}:{{ cluster.port }}
     validate_certs: no
     status_code: [200, 401]
