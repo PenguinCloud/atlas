@@ -1,2 +1,14 @@
 ---
-- name: Install
+- name: Initialize node
+  shell: kubeadm init --control-plane-endpoint "{{ cluster.fqdn }}:{{ cluster.port }}" --upload-certs
+  register: kube_init
+  when: cluster.first
+- name: results
+  debug: 
+    var: kube
+    verbosity: 2
+- name: Copy the prior results somewhere... we'll wait a minute
+  pause:
+    minutes: 1
+- name: We'll make a copy just in case
+  shell: echo '{{ kube_init.stdout }}' >> ~/mykubeinfo
