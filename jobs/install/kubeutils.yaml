@@ -27,12 +27,14 @@
     state: latest
 - name: Install kubectl
   apt:
-    name: 
-      pkg:
-        - kubectl
+    name: kubectl
+    state: latest
+- name: Install kubeadm and Kubelet
+  apt:
+    pkg:
         - kubeadm
         - kubelet
-    state: latest
+  when: cluster.build == "k8s"
 - name: Copy Kube Config
   ansible.builtin.copy:
     src:  "{{ k3s.config }}"
