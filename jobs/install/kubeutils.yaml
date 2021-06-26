@@ -13,7 +13,11 @@
     state: latest
 - name: Install kubectl
   apt:
-    name: kubectl
+    name: 
+      pkg:
+        - kubectl
+        - kubeadm
+        - kubelet
     state: latest
 - name: Copy Kube Config
   ansible.builtin.copy:
