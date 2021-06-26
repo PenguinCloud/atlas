@@ -3,6 +3,7 @@ cluster:
   ip: 108.61.229.5
   port: 6443
   fqdn: cluster.penguinzmedia.group
+  build: k8s
 db:
   ip: 66.42.116.45
   port: 3306
