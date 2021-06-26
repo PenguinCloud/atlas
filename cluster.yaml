@@ -10,6 +10,7 @@
       include_tasks: jobs/initialize.yaml
     - name: Install K3s
       include_tasks: jobs/install/k3s.yaml
+      when: cluster.build == "k3s"
     - name: Install Helm
       include_tasks: jobs/install/helm.yaml
     - name: Install Kubectl
