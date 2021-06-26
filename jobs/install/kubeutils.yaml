@@ -1,3 +1,17 @@
+- name: enable br_netfilter
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
+- name: Configure sysctl
+  shell: |
+    cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+    br_netfilter
+    EOF
+    cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+    net.bridge.bridge-nf-call-ip6tables = 1
+    net.bridge.bridge-nf-call-iptables = 1
+    EOF
+    sudo sysctl --system
 - name: Install key
   ansible.builtin.apt_key:
     url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
