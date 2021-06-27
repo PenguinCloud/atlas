@@ -8,10 +8,10 @@ cluster:
 db:
   ip: 10.2.144.9
   port: 3306
+user:
+  config: /root/.kube/config
 k3s:
   config: /etc/rancher/k3s/k3s.yaml
-  user:
-    config: /root/.kube/config
   username: pmgk3s
   password: WhiskeyTiskeyMiskey
   db:
@@ -20,5 +20,7 @@ k3s:
     pass: 0XC2b6Nqdfyo887xJ860qVb
 admin:
   email: justin@penguinzmedia.group
+  username: pmg-admin
+  password: Xgl&3wU^pY5&Y3Xe
 rancher:
   port: 443
