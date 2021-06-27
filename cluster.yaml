@@ -11,8 +11,8 @@
     - name: Install K3s
       include_tasks: jobs/install/k3s.yaml
       when: cluster.build == "k3s"
-    - name: Install Kubectl
-      include_tasks: jobs/install/kubectl.yaml
+    - name: Install Kube Utils
+      include_tasks: jobs/install/kubeutils.yaml
     - name: Configure Kubectl
       include_tasks: jobs/configure/kubectl.yaml
     - name: Install k8s
