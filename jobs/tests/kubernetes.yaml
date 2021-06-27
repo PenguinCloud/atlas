@@ -3,7 +3,7 @@
   command: "kubectl get nodes"
   register: node_list
   environment:
-    KUBECONFIG: "{{ k3s.user.config }}"
+    KUBECONFIG: "{{ user.config }}"
   retries: 3
   delay: 2
   until: node_list.rc == 0
@@ -14,6 +14,6 @@
   when: node_list.stdout.find('Ready') == 0 
 - name: Checking connection to kubernetes
   uri:
-    url: https://{{ cluster.fqdn }}:{{ cluster.port }}
+    url: https://{{ cluster.ip }}:{{ cluster.port }}
     validate_certs: no
     status_code: [200, 401]
