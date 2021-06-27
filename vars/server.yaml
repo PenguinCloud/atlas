@@ -10,6 +10,8 @@ db:
   port: 3306
 user:
   config: /root/.kube/config
+k8s:
+  config: /etc/kubernetes/admin.yaml
 k3s:
   config: /etc/rancher/k3s/k3s.yaml
   username: pmgk3s
