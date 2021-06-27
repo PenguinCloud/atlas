@@ -1,24 +1,24 @@
 ---
 - name: Replace a localhost entry searching for a literal string to avoid escaping
   lineinfile:
-    path: "{{ k3s.user.config }}"
+    path: "{{ user.config }}"
     search_string: "    server: https://127.0.0.1:6443"
-    line: "    server: https://{{ cluster.fqdn }}:6443"
+    line: "    server: https://{{ cluster.ip }}:6443"
 - name: Add user definition
   ansible.builtin.lineinfile:
-    path: "{{ k3s.user.config }}"
-    line: "    username: {{ k3s.username }}"
+    path: "{{ user.config }}"
+    line: "    username: {{ admin.username }}"
     regexp: "^( )*username:"
     create: yes
 - name: Add user password definition
   ansible.builtin.lineinfile:
-    path: "{{ k3s.user.config }}"
-    line: "    password: {{ k3s.password }}"
+    path: "{{ user.config }}"
+    line: "    password: {{ admin.password }}"
     regexp: "^( )*password:"
     create: yes
 - name: Change config permissions
   file:
-    path: "{{ k3s.user.config }}"
+    path: "{{ user.config }}"
     mode: 700
     owner: root
     group: root
