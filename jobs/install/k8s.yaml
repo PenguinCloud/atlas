@@ -1,6 +1,6 @@
 ---
 - name: Initialize node
-  shell: kubeadm init --control-plane-endpoint "{{ cluster.fqdn }}:{{ cluster.port }}" --upload-certs
+  shell: kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs
   register: kube_init
   when: cluster.first
 - name: results
