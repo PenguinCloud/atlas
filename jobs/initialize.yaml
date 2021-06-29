@@ -36,7 +36,7 @@
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ release.stdout }} stable"
     state: present
-    file: docker
+    filename: docker
     update_cache: yes
 - name: Install Docker-CE (which has less issues with kube)
   apt:
