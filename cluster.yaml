@@ -8,37 +8,49 @@
   tasks:
     - name: Update and get container to standard point
       include_tasks: jobs/initialize.yaml
-      tags:
-        - enviro
+      apply:
+        tags:
+          - enviro
     - name: Install K3s
       include_tasks: jobs/install/k3s.yaml
       when: cluster.build == "k3s"
     - name: Install Kube Utils
       include_tasks: jobs/install/kubeutils.yaml
-      tags:
-        - enviro
+      apply:
+        tags:
+          - enviro
     - name: Install k8s
       include_tasks: jobs/install/k8s.yaml
       when: cluster.build == "k8s"
+      apply:
+        tags:
+          - k8s
     - name: Configure Kubectl
       include_tasks: jobs/configure/kubectl.yaml
+      apply:
+        tags:
+          - enviro
     - name: Test Kubernetess
       include_tasks: jobs/tests/kubernetes.yaml
     - name: Install Helm
       include_tasks: jobs/install/helm.yaml
     - name: Install Cert Manager
       include_tasks: jobs/install/cert-manager.yaml
-      tags:
-        - cert-manager
+      apply:
+        tags:
+          - cert-manager
     - name: Test Cert Manager
       include_tasks: jobs/tests/cert-manager.yaml
-      tags:
-        - cert-manager
+      apply:
+        tags:
+          - cert-manager
     - name: Install Rancher
       include_tasks: jobs/install/rancher.yaml
-      tags:
-        - rancher
+      apply:
+        tags:
+          - rancher
     - name: Test Rancher
       include_tasks: jobs/tests/rancher.yaml
-      tags:
-        - rancher
+      apply:
+        tags:
+          - rancher
