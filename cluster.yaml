@@ -31,6 +31,10 @@
             - enviro
       tags:
         - enviro
+    - name: reset kubeadm
+      shell: kubeadm reset
+      ignore_errors: yes
+      tags: resetkube, never
     - name: Install k8s
       include_tasks: 
         file: jobs/install/k8s.yaml

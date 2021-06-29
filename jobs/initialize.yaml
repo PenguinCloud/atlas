@@ -30,14 +30,13 @@
 - name: Set system variables
   ansible.posix.sysctl:
     name: "{{ item }}"
-    value: '1'
+    value: 1
     state: present
   loop:
     - net.bridge.bridge-nf-call-ip6tables
     - net.bridge.bridge-nf-call-iptables
 - name: Disable SELinux
-  policy: targeted
-  state: permissive
+  shell: setenforce 0
 - name: Clean docker
   apt:
     pkg:
