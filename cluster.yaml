@@ -32,8 +32,16 @@
       tags:
         - enviro
     - name: reset kubeadm
-      shell: kubeadm reset
-      ignore_errors: yes
+      block:
+      - shell: kubeadm reset
+        ignore_errors: yes
+      - file:
+        state: absent
+        path: " {{ item }}"
+        loop:
+          - /etc/kubernetes/
+          - /var/lib/kubelet/
+          - /var/lib/etcd
       tags: resetkube, never
     - name: Install k8s
       include_tasks: 
