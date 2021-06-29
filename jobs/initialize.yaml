@@ -36,8 +36,8 @@
     - net.bridge.bridge-nf-call-ip6tables
     - net.bridge.bridge-nf-call-iptables
 - name: Disable SELinux
-  ansible.posix.selinux:
-    state: disabled
+  policy: targeted
+  state: permissive
 - name: Clean docker
   apt:
     pkg:
