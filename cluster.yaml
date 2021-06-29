@@ -71,13 +71,15 @@
             - cert-manager
             - test
     - name: Install Rancher
-      include_tasks: jobs/install/rancher.yaml
-      apply:
-        tags:
-          - rancher
+      include_tasks: 
+        file: jobs/install/rancher.yaml
+        apply:
+          tags:
+            - rancher
     - name: Test Rancher
-      include_tasks: jobs/tests/rancher.yaml
-      apply:
-        tags:
-          - rancher
-          - test
+      include_tasks: 
+        file: jobs/tests/rancher.yaml
+        apply:
+          tags:
+            - rancher
+            - test
