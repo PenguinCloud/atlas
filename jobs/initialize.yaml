@@ -28,12 +28,10 @@
       runc
     state: absent
 - name: Install Docker GPG Key 
-  ansible.builtin.expect:
-    command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    timeout: 5
-    responses:
-      (?i)Overwrite: "y"
-  ignore_errors: yes
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /usr/share/keyrings/docker-archive-keyring.gpg
+    state: present
 - name: Get OS code name
   shell: lsb_release -cs
   register: release
