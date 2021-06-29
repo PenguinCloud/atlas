@@ -19,11 +19,11 @@
       - software-properties-common
       - cron
       - python3-selinux
+      - libselinux1-dev
     state: latest
 - name: Install Pip libs
   pip:
     name:
-      - selinux
       - openshift
       - kubernetes
     executable: pip3
