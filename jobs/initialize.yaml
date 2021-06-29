@@ -10,10 +10,12 @@
       - vim
       - nano
       - net-tools
-      - docker.io
+      - docker-ce
       - unzip
       - curl
       - apt-transport-https
       - ca-certificates
-      - containerd
+      - gnupg2 
+      - software-properties-common
       - cron
+    state: latest
