@@ -18,6 +18,7 @@
       - gnupg2 
       - software-properties-common
       - cron
+      - python3-selinux
     state: latest
 - name: Install Pip libs
   pip:
