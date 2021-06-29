@@ -12,12 +12,16 @@
         apply:
           tags:
             - enviro
+      tags:
+        - enviro
     - name: Install K3s
       include_tasks: 
         file: jobs/install/k3s.yaml
         apply:
           tags:
-            - enviro
+            - k3s
+      tags:
+        - k3s
       when: cluster.build == "k3s"
     - name: Install Kube Utils
       include_tasks: 
@@ -25,6 +29,8 @@
         apply:
           tags:
             - enviro
+      tags:
+        - enviro
     - name: Install k8s
       include_tasks: 
         file: jobs/install/k8s.yaml
@@ -32,7 +38,8 @@
           tags:
             - k8s
       when: cluster.build == "k8s"
-      
+      tags:
+        - k8s
     - name: Configure Kubectl
       include_tasks: 
         file: jobs/configure/kubectl.yaml
@@ -41,6 +48,10 @@
             - k8s
             - k3s
             - kctl
+      tags:
+        - k8s
+        - k3s
+        - kctl
     - name: Test Kubernetess
       include_tasks: 
         file: jobs/tests/kubernetes.yaml
@@ -49,20 +60,26 @@
             - k8s
             - k3s
             - test
+      tags:
+        - k8s
+        - k3s
+        - test
     - name: Install Helm
       include_tasks: 
         file: jobs/install/helm.yaml
         apply:
           tags:
             - helm
-            - rancher
-            - cert-manager
+      tags:
+        - helm
     - name: Install Cert Manager
       include_tasks: 
         file: jobs/install/cert-manager.yaml
         apply:
           tags:
             - cert-manager
+      tags:
+        - cert-manager
     - name: Test Cert Manager
       include_tasks: 
         file: jobs/tests/cert-manager.yaml
@@ -70,12 +87,17 @@
           tags:
             - cert-manager
             - test
+      tags:
+        - cert-manger
+        - test
     - name: Install Rancher
       include_tasks: 
         file: jobs/install/rancher.yaml
         apply:
           tags:
             - rancher
+      tags:
+        - rancher
     - name: Test Rancher
       include_tasks: 
         file: jobs/tests/rancher.yaml
@@ -83,3 +105,6 @@
           tags:
             - rancher
             - test
+      tags:
+        - rancher
+        - test
