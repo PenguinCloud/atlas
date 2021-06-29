@@ -19,6 +19,13 @@
       - software-properties-common
       - cron
     state: latest
+- name: Install Pip libs
+  pip:
+    name:
+      - selinux
+      - openshift
+      - kubernetes
+    executable: pip3
 - name: Set system variables
   ansible.posix.sysctl:
     name: "{{ item }}"

@@ -1,6 +1,6 @@
 #!/bin/bash
 apt install python3 python3-pip -y
-pip3 install ansible openshift
+pip3 install ansible
 mkdir -p /etc/ansible
 mkdir -p /root/.kube
 FILE=/etc/ansible/hosts
