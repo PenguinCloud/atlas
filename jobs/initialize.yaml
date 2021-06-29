@@ -9,6 +9,7 @@
     pkg:
       - vim
       - nano
+      - selinux-utils
       - net-tools
       - unzip
       - curl
@@ -18,6 +19,16 @@
       - software-properties-common
       - cron
     state: latest
+- name: Set system variables
+  shell: |
+    sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+    modprobe br_netfilter 
+    cat <<EOF >  /etc/sysctl.d/kube.conf
+    net.bridge.bridge-nf-call-ip6tables = 1
+    net.bridge.bridge-nf-call-iptables = 1
+    EOF
+    sysctl --system
+    setenforce 0
 - name: Clean docker
   apt:
     pkg:
@@ -48,6 +59,12 @@
       - docker-ce-cli 
       - containerd.io
     state: present
-
-
+- name: Enable Kube services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: True
+  loop: 
+    - docker 
+    - kubelet
 
