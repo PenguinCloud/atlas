@@ -31,9 +31,9 @@
   ansible.builtin.expect:
     command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     timeout: 5
-    ignore_errors: yes
     responses:
       (?i)Overwrite: "y"
+  ignore_errors: yes
 - name: Get OS code name
   shell: lsb_release -cs
   register: release
