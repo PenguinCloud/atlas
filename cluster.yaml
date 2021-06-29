@@ -7,43 +7,69 @@
     - vars/server.yaml
   tasks:
     - name: Update and get container to standard point
-      include_tasks: jobs/initialize.yaml
-      apply:
-        tags:
-          - enviro
+      include_tasks: 
+        file: jobs/initialize.yaml
+        apply:
+          tags:
+            - enviro
     - name: Install K3s
-      include_tasks: jobs/install/k3s.yaml
+      include_tasks: 
+        file: jobs/install/k3s.yaml
+        apply:
+          tags:
+            - enviro
       when: cluster.build == "k3s"
     - name: Install Kube Utils
-      include_tasks: jobs/install/kubeutils.yaml
-      apply:
-        tags:
-          - enviro
+      include_tasks: 
+        file: jobs/install/kubeutils.yaml
+        apply:
+          tags:
+            - enviro
     - name: Install k8s
-      include_tasks: jobs/install/k8s.yaml
+      include_tasks: 
+        file: jobs/install/k8s.yaml
+        apply:
+          tags:
+            - k8s
       when: cluster.build == "k8s"
-      apply:
-        tags:
-          - k8s
+      
     - name: Configure Kubectl
-      include_tasks: jobs/configure/kubectl.yaml
-      apply:
-        tags:
-          - enviro
+      include_tasks: 
+        file: jobs/configure/kubectl.yaml
+        apply:
+          tags:
+            - k8s
+            - k3s
+            - kctl
     - name: Test Kubernetess
-      include_tasks: jobs/tests/kubernetes.yaml
+      include_tasks: 
+        file: jobs/tests/kubernetes.yaml
+        apply:
+          tags:
+            - k8s
+            - k3s
+            - test
     - name: Install Helm
-      include_tasks: jobs/install/helm.yaml
+      include_tasks: 
+        file: jobs/install/helm.yaml
+        apply:
+          tags:
+            - helm
+            - rancher
+            - cert-manager
     - name: Install Cert Manager
-      include_tasks: jobs/install/cert-manager.yaml
-      apply:
-        tags:
-          - cert-manager
+      include_tasks: 
+        file: jobs/install/cert-manager.yaml
+        apply:
+          tags:
+            - cert-manager
     - name: Test Cert Manager
-      include_tasks: jobs/tests/cert-manager.yaml
-      apply:
-        tags:
-          - cert-manager
+      include_tasks: 
+        file: jobs/tests/cert-manager.yaml
+        apply:
+          tags:
+            - cert-manager
+            - test
     - name: Install Rancher
       include_tasks: jobs/install/rancher.yaml
       apply:
@@ -54,3 +80,4 @@
       apply:
         tags:
           - rancher
+          - test
