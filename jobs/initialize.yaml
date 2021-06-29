@@ -67,11 +67,16 @@
       - docker-ce-cli 
       - containerd.io
     state: present
+- name: Copy Daemon file
+  ansible.builtin.copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
 - name: Enable Kube services
   systemd:
     name: "{{ item }}"
     state: started
-    enabled: True
+    enabled: yes
+    daemon_reload: yes
   loop: 
     - docker 
     - kubelet
