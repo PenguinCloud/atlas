@@ -10,7 +10,6 @@
       - vim
       - nano
       - net-tools
-      - docker-ce
       - unzip
       - curl
       - apt-transport-https
@@ -19,3 +18,33 @@
       - software-properties-common
       - cron
     state: latest
+- name: Clean docker
+  apt:
+    pkg:
+      docker 
+      docker-engine 
+      docker.io 
+      containerd 
+      runc
+    state: absent
+- name: Install Docker GPG key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+- name: Get OS code name
+  shell: lsb_release -cs
+  register: release
+- name: Install Docker PPA
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ release.stdout }} stable"
+    state: present
+    file: docker
+    update_cache: yes
+- name: Install Docker-CE (which has less issues with kube)
+  apt:
+    pkg: 
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io
+    state: present
+
+
+
