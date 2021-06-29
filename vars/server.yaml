@@ -5,6 +5,7 @@ cluster:
   fqdn: cluster.penguinzmedia.group
   build: k8s
   first: yes
+  pod_cidr: 192.168.0.0/16
 db:
   ip: 10.2.144.9
   port: 3306
