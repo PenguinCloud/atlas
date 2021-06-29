@@ -33,11 +33,13 @@
         - enviro
     - name: reset kubeadm
       block:
-        - shell: kubeadm reset
+        - name: Reset kubeadm
+          shell: kubeadm reset
           ignore_errors: yes
-        - file:
-          state: absent
-          path: " {{ item }}"
+        - name: Delete paths
+          file:
+            state: absent
+            path: " {{ item }}"
           loop:
             - /etc/kubernetes/
             - /var/lib/kubelet/
