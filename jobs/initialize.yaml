@@ -9,8 +9,8 @@
     pkg:
       - vim
       - nano
+      - selinux-utils
       - net-tools
-      - docker-ce
       - unzip
       - curl
       - apt-transport-https
@@ -19,3 +19,52 @@
       - software-properties-common
       - cron
     state: latest
+- name: Set system variables
+  shell: |
+    sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+    modprobe br_netfilter 
+    cat <<EOF >  /etc/sysctl.d/kube.conf
+    net.bridge.bridge-nf-call-ip6tables = 1
+    net.bridge.bridge-nf-call-iptables = 1
+    EOF
+    sysctl --system
+    setenforce 0
+- name: Clean docker
+  apt:
+    pkg:
+      docker 
+      docker-engine 
+      docker.io 
+      containerd 
+      runc
+    state: absent
+- name: Install Docker GPG Key 
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /usr/share/keyrings/docker-archive-keyring.gpg
+    state: present
+- name: Get OS code name
+  shell: lsb_release -cs
+  register: release
+- name: Install Docker PPA
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ release.stdout }} stable"
+    state: present
+    filename: docker
+    update_cache: yes
+- name: Install Docker-CE (which has less issues with kube)
+  apt:
+    pkg: 
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io
+    state: present
+- name: Enable Kube services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: True
+  loop: 
+    - docker 
+    - kubelet
+
