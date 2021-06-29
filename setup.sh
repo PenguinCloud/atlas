@@ -11,7 +11,7 @@ echo "[cluster]"  >> /etc/ansible/hosts
 echo 'localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python3"'  >> /etc/ansible/hosts
 fi
 export KUBECONFIG=/root/.kube/config
-if $1; then
+if [ -z $1 ]; then 
 ansible-playbook  cluster.yaml --connection=local --tags $1
 else
 ansible-playbook  cluster.yaml --connection=local
