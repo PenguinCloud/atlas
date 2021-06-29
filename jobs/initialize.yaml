@@ -20,15 +20,16 @@
       - cron
     state: latest
 - name: Set system variables
-  shell: |
-    sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
-    modprobe br_netfilter 
-    cat <<EOF >  /etc/sysctl.d/kube.conf
-    net.bridge.bridge-nf-call-ip6tables = 1
-    net.bridge.bridge-nf-call-iptables = 1
-    EOF
-    sysctl --system
-    setenforce 0
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    value: '1'
+    state: present
+  loop:
+    - net.bridge.bridge-nf-call-ip6tables
+    - net.bridge.bridge-nf-call-iptables
+- name: Disable SELinux
+  ansible.posix.selinux:
+    state: disabled
 - name: Clean docker
   apt:
     pkg:

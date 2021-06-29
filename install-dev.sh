@@ -48,5 +48,6 @@ IU0fi2Ke71Ho19HlReOaQU9sltpRFp+uQGNLAeiEmyNeH1tGhWVwE7ahS0XTIk+PLCk1Ls
 xKsSBE11oJTJAAAAD3BtZy1tYWluLW5vZGUtMQECAw==
 -----END OPENSSH PRIVATE KEY-----" > /root/.ssh/id_rsa
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6QWxTm0rX56cmXNzU1AJcM0cPF2aNbvfVMN0o569AhK98yUGH3hbKZ6smfhw1GvnjWmQf+gm/zub6hQhi4CpOwJUl8RoTubZw12EDyRx5pdz9AD641DlCCePpi7RdLBWJuSjpQEe8p/F2biotOidVRw+BxEmoJpOOSaJw/Cpt1imCsnCS3zzkx7DAZdcofcwguEBN+SHsxZ5R/XURuaFzsm6HYwgl8cvurhABUhTwmhZ3Yb3vfVjwYfRQ2eB8j5oZ2Mnbp/mxozFSUh4NW8dmB/yt1kVACFyhS++aRBksWO9JNaDnsD2ZHZdsk2FDr4hRKDD/mBHYmS6txDHfRw2dFTqRhC2kY33AiOrb7nZ69J5sZdRJTWEYae/n3jiu4A11lB8zk6dzKiX+E7ELxXfAJMcyCSj1aR2itfW30FIh2kg1IIF4PLroaOeuOLj/WywlCPkBgkNRCaJzH6yrTioUl69PkygXPKfTyvS/ZEL0k8QlOPQog1F8ubtT/qEhUw2IlgkkNVrV9w6QC0RU+gPY6fbC+mnFlrMtCDQ4DqAcjNyKaIniA0F5281x3++xXV7GAcXPRFxRRz0HUkRqqbhwi9zmFlrUhsUJeKP+hIhjb4ndDvT+gQ7Zb/3hn9cTcqUnCsz2lZN5rYY0lmZ4Ap2qGJELjJqL6xQtR1zyUTVPoQ== pmg-main-node-1" > /root/.ssh/id_rsa.pub
+chmod 500 /root/.ssh -R
 cd /opt
 git clone git@code.penguinzmedia.group:pmg-infra/rancher-cluster-main-build.git
