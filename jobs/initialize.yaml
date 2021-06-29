@@ -37,6 +37,7 @@
     - net.bridge.bridge-nf-call-iptables
 - name: Disable SELinux
   shell: setenforce 0
+  ignore_errors: yes
 - name: Clean docker
   apt:
     pkg:
