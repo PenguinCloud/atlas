@@ -12,7 +12,7 @@ echo 'localhost ansible_connection=local ansible_python_interpreter="/usr/bin/en
 fi
 export KUBECONFIG=/root/.kube/config
 if [ -z $1 ]; then 
-ansible-playbook  cluster.yaml --connection=local --tags $1
+ansible-playbook  cluster.yaml --connection=local 
 else
-ansible-playbook  cluster.yaml --connection=local
+ansible-playbook  cluster.yaml --connection=local --tags $1
 fi
