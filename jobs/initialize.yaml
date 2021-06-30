@@ -2,7 +2,7 @@
 - name: Add cluster local dns info
   ansible.builtin.lineinfile:
     path: /etc/hosts
-    line:  "{{ cluster.ip }}  {{ fluster.fqdn }}"
+    line:  "{{ cluster.ip }}  {{ cluster.fqdn }}"
     create: yes
 - name: Update system
   apt:
