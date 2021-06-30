@@ -4,6 +4,10 @@
     path: /etc/hosts
     line:  "{{ cluster.ip }}  {{ cluster.fqdn }}"
     create: yes
+- name: enable br_netfilter
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
 - name: Update system
   apt:
     name: "*"
@@ -78,6 +82,10 @@
   ansible.builtin.copy:
     src: daemon.json
     dest: /etc/docker/daemon.json
+- name: enable overlay
+  community.general.modprobe:
+    name: overlay
+    state: present
 - name: Enable Docker services
   systemd:
     name: "{{ item }}"
@@ -86,8 +94,5 @@
     daemon_reload: yes
   loop: 
     - docker 
-- name: enable br_netfilter
-  community.general.modprobe:
-    name: br_netfilter
-    state: present
+
 
