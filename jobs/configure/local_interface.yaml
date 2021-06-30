@@ -10,10 +10,9 @@
     line: "        {{ nextFreeIf }}"
     create: yes
 - name: update config for ip
-  lineinfile:
-    yedit:
-      src: "/etc/netplan/20-{{ nextFreeIf }}.yaml"
-      key: "network.ethernets.{{ nextFreeIf }}.addresses"
-      value: "{{ localip }}"
+  yedit:
+    src: "/etc/netplan/20-{{ nextFreeIf }}.yaml"
+    key: "network.ethernets.{{ nextFreeIf }}.addresses"
+    value: "{{ localip }}"
 - name: Initiate netplan
   shell: netplan apply
