@@ -1,7 +1,7 @@
 #!/bin/bash
 apt install python3 python3-pip -y
 pip3 install ansible
-ansible-galaxy install -r configs/ansible-requirements.yaml
+ansible-galaxy install -r config/ansible-requirements.yaml
 mkdir -p /etc/ansible
 mkdir -p /root/.kube
 FILE=/etc/ansible/hosts
