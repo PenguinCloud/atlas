@@ -7,7 +7,7 @@
   ansible.builtin.lineinfile:
     path: "/etc/netplan/20-{{ nextFreeIf }}.yaml"
     search_string: enp6s0
-    line: "        {{ nextFreeIf }}"
+    line: "        {{ nextFreeIf }}:"
     create: yes
 - name: update IP
   ansible.builtin.lineinfile:
