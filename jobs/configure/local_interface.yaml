@@ -4,10 +4,11 @@
     src: "{{ playbook_dir }}/configs/20-netplan.yaml"
     dest: "/etc/netplan/20-{{ nextFreeIf }}.yaml"
 - name: update config for name
-  yedit:
-    src: "/etc/netplan/20-{{ nextFreeIf }}.yaml"
-    key: network.ethernets
-    value: "{{ nextFreeIf }}"
+  ansible.builtin.lineinfile:
+    path: "/etc/netplan/20-{{ nextFreeIf }}.yaml"
+    search_string: enp6s0
+    line: "        {{ nextFreeIf }}"
+    create: yes
 - name: update config for ip
   lineinfile:
     yedit:
