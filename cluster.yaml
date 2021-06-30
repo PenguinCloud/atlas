@@ -6,6 +6,9 @@
   roles:
     - kwoodson.yedit
   vars_prompt:
+    - name: nextFreeIf
+      prompt: "What is the local interface without an ip or with a number higher than enp3s0?"
+      private: no
     - name: localip
       prompt: "What is the assigned local ip CIDR for your local net device (dont forget the net CIDR)?"
       private: no
