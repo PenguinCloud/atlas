@@ -72,7 +72,7 @@
   ansible.builtin.copy:
     src: daemon.json
     dest: /etc/docker/daemon.json
-- name: Enable Kube services
+- name: Enable Docker services
   systemd:
     name: "{{ item }}"
     state: started
@@ -80,5 +80,8 @@
     daemon_reload: yes
   loop: 
     - docker 
-    - kubelet
+- name: enable br_netfilter
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
 
