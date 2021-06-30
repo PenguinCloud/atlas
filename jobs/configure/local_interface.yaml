@@ -1,7 +1,7 @@
 ---
 - name: calc next free interface
-      set_fact:
-        nextFreeIf: "{% set ifacePrefix = vars.ansible_default_ipv4.alias %}{% set ifaceNum = { 'cnt': 0 } %}{% macro increment(dct, key, inc=1)%}{% if dct.update({key: dct[key] + inc}) %} {% endif %}{% endmacro %}{% for iface in ansible_interfaces|sort %}{% if iface| regex_search('^' ~ vars.ansible_default_ipv4.alias) %}{{ increment(ifaceNum, 'cnt') }}{% endif %}{% endfor %}{{ifacePrefix}}:{{ifaceNum.cnt}}"1
+  set_fact:
+    nextFreeIf: "{% set ifacePrefix = vars.ansible_default_ipv4.alias %}{% set ifaceNum = { 'cnt': 0 } %}{% macro increment(dct, key, inc=1)%}{% if dct.update({key: dct[key] + inc}) %} {% endif %}{% endmacro %}{% for iface in ansible_interfaces|sort %}{% if iface| regex_search('^' ~ vars.ansible_default_ipv4.alias) %}{{ increment(ifaceNum, 'cnt') }}{% endif %}{% endfor %}{{ifacePrefix}}:{{ifaceNum.cnt}}"1
 - name: copy template
   copy:
     src: "{{ playbook_dir }}/configs/netplan/20-netplan.yaml"
