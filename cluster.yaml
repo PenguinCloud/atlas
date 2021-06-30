@@ -20,6 +20,12 @@
             - enviro
       tags:
         - enviro
+    - name: Setup local interface
+      include_tasks:
+        file: jobs/configure/local_interface.yaml
+        apply:
+          tags:
+            - enviro
     - name: Install K3s
       include_tasks: 
         file: jobs/install/k3s.yaml
