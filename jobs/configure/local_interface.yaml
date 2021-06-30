@@ -1,7 +1,7 @@
 ---
 - name: copy template
   copy:
-    src: "{{ playbook_dir }}/configs/netplan/20-netplan.yaml"
+    src: "{{ playbook_dir }}/configs/20-netplan.yaml"
     dest: "/etc/netplan/20-{{ nextFreeIf }}.yaml"
 - name: update config for name
   yedit:
