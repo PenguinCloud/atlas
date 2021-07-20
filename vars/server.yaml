@@ -12,9 +12,9 @@ db:
 user:
   config: /root/.kube/config
 k8s:
-  config: /etc/kubernetes/admin.yaml
+  config: /etc/kubernetes/admin.conf
 k3s:
-  config: /etc/rancher/k3s/k3s.yaml
+  config: /etc/rancher/k3s/k3s.conf
   username: pmgk3s
   password: WhiskeyTiskeyMiskey
   db:
