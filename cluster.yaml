@@ -112,6 +112,14 @@
             - helm
       tags:
         - helm
+    - name: Install Traefik Ingress Controller
+      include_tasks:
+        file: jobs/install/traefik.yaml
+        apply:
+          tags:
+            - traefik
+      tags:
+        - traefik
     - name: Install Cert Manager
       include_tasks: 
         file: jobs/install/cert-manager.yaml

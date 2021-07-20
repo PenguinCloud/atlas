@@ -1,0 +1,18 @@
+---
+- name: Create traefik namespace
+  community.kubernetes.k8s:
+    name: traefik
+    api_version: v1
+    kind: Namespace
+    state: present
+- name: Create a traefik deployment
+  community.kubernetes.k8s:
+    state: present
+    src: "{{ playbook_dir }}/configs/traefik-config.yaml"
+- name: Deploy latest version of Traefik
+  community.kubernetes.helm:
+    name: Traefik
+    chart_ref: traefik/traefik
+    release_namespace: traefik
+    values_files: traefik-chart-values.yaml
+

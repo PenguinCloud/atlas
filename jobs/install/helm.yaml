@@ -20,6 +20,10 @@
   community.kubernetes.helm_repository:
     name: rancher-stable
     repo_url: https://releases.rancher.com/server-charts/stable
+- name: Add Traefik ingress controller
+  community.kubernetes.helm_repository:
+    name: traefik
+    repo_url: https://helm.traefik.io/traefik
 - name: Add Jetstack chart repo
   community.kubernetes.helm_repository:
     name: jetstack
