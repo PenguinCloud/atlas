@@ -86,7 +86,7 @@
         - kctl
     - name: Install CNI
       include_tasks:
-        file: jobs/configure/k8s.yaml
+        file: jobs/install/canal.yaml
         apply:
           tags:
             - k8s
