@@ -21,10 +21,10 @@ env:
     valueFrom:
       secretKeyRef:
         key: apiKey
-        name: YP0R4mySBFr4K_IPyJRy5KMJe-mMmBuFe_2-uO5j
+        name: "YP0R4mySBFr4K_IPyJRy5KMJe-mMmBuFe_2-uO5j"
 ingressRoute:
   dashboard:
-    enabled: false
+    enabled: true
 persistence:
   enabled: true
   path: /certs
