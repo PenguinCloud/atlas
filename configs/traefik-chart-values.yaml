@@ -16,12 +16,12 @@ env:
     valueFrom:
       secretKeyRef:
         key: email
-        name: justin@penguinzmedia.group
+        name: cloudflare-api-credentials
   - name: CF_API_KEY
     valueFrom:
       secretKeyRef:
         key: apiKey
-        name: "YP0R4mySBFr4K_IPyJRy5KMJe-mMmBuFe_2-uO5j"
+        name: cloudflare-api-credentials
 ingressRoute:
   dashboard:
     enabled: true
