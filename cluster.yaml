@@ -67,9 +67,11 @@
         apply:
           tags:
             - k8s
+            - first
       when: cluster.build == "k8s"
       tags:
         - k8s
+        - first
     - name: Configure Kubectl
       include_tasks: 
         file: jobs/configure/kubectl.yaml
