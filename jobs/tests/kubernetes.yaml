@@ -16,4 +16,4 @@
   uri:
     url: https://{{ cluster.ip }}:{{ cluster.port }}
     validate_certs: no
-    status_code: [200, 401]
+    status_code: [200, 401, 403]
