@@ -88,8 +88,8 @@
         apply:
           tags:
             - k8s
-        tags:
-          - k8s
+      tags:
+        - k8s
     - name: Test Kubernetess
       include_tasks: 
         file: jobs/tests/kubernetes.yaml
