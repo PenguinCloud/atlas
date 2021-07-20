@@ -30,6 +30,7 @@
         apply:
           tags:
             - enviro
+            - first
     - name: Install K3s
       include_tasks: 
         file: jobs/install/k3s.yaml
