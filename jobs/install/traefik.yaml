@@ -19,5 +19,5 @@
     name: traefik
     chart_ref: traefik/traefik
     release_namespace: traefik
-    values_files: traefik-chart-values.yaml
+    values_files: "{{ playbook_dir }}/configs/traefik-chart-values.yaml"
 
