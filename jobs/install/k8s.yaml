@@ -5,7 +5,7 @@
   when: cluster.first
 - name: results
   debug: 
-    var: kube
+    var: kube_init
     verbosity: 2
 - name: Copy the prior results somewhere... we'll wait a minute
   pause:
