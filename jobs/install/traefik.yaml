@@ -16,7 +16,7 @@
     src: "{{ playbook_dir }}/configs/traefik-config.yaml"
 - name: Deploy latest version of Traefik
   community.kubernetes.helm:
-    name: Traefik
+    name: traefik
     chart_ref: traefik/traefik
     release_namespace: traefik
     values_files: traefik-chart-values.yaml
