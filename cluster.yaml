@@ -82,6 +82,14 @@
         - k8s
         - k3s
         - kctl
+    - name: Install CNI
+      include_tasks:
+        file: jobs/configure/k8s.yaml
+        apply:
+          tags:
+            - k8s
+        tags:
+          - k8s
     - name: Test Kubernetess
       include_tasks: 
         file: jobs/tests/kubernetes.yaml
