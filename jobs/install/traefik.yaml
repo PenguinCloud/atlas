@@ -1,4 +1,9 @@
 ---
+- name: Make user kube config only for root's eyes
+  ansible.builtin.file:
+    path: /root/.kube/config
+    state: file
+    mode: '0700'
 - name: Create traefik namespace
   community.kubernetes.k8s:
     name: traefik
