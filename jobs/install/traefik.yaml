@@ -4,6 +4,9 @@
     path: /root/.kube/config
     state: file
     mode: '0700'
+- name: Update Helm Cache
+  shell:
+    cmd: helm repo update
 - name: Create traefik namespace
   community.kubernetes.k8s:
     name: traefik
