@@ -2,17 +2,23 @@
 - name: Initialize Primary Control node
   shell: 'kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs --pod-network-cidr={{ cluster.pod_cidr }} -v=9'
   register: kube_init
-  when: cluster.first
+  when: node.primary and node.type=="control"
   tags:
     - primary
     - control
 - name: Initialize Secondary Control nodes
   shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ cluster.join.token }} --discovery-token-ca-cert-hash {{ cluster.join.hash }} --control-plane'
   register: kube_init
-  when: not cluster.first
+  when: not node.primary and node.type=="control"
   tags:
     - secondary
     - control
+- name: Initialize Worker nodes
+  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ cluster.join.token }} --discovery-token-ca-cert-hash {{ cluster.join.hash }}'
+  register: kube_init
+  when: node.type=="worker"
+  tags:
+    - worker
 - name: results
   debug: 
     var: kube_init
