@@ -1,5 +1,5 @@
 ---
-- name: Install Rancher Cluster Main Node
+- name: Install Kubernetes on cluster
   hosts: cluster
   become: yes
   remote_user: root
