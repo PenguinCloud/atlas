@@ -1,6 +1,11 @@
 # Kubernetes Build Playbook
 Builds a K8s or K3s cluster with one or many control and one or multiple worker nodes
 
+## Requirements
+* Must have internet connectivity
+* Must have access to Apt and helm Repos
+* Must be able to pull the baseline git package from PMG Code Server
+
 ## Tags
 Tags help the script determine what mode to run
 ### Type of Node
