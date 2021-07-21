@@ -17,11 +17,11 @@ all:
               vars:
                 node:
                   primary: yes
-            control[2-3].penguinzmedia.group:
+            control[2:3].penguinzmedia.group:
         worker:
           vars:
             node:
               type: worker
           hosts:
-            worker[1-3].penguinzmedia.group:
+            worker[1:3].penguinzmedia.group:
 
