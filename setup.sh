@@ -4,14 +4,13 @@ git clone git@code.penguinzmedia.group:pmg-build-standards/baseline-ansible-setu
 cd baseline-ansible-setup
 chmod +x ./setup.sh
 ./setup.sh
-cd /opt
 
 mkdir -p /root/.kube
 
 export KUBECONFIG=/root/.kube/config
 echo "Printing your local ip info for the next prompt"
 ip a
-
+cd /opt/atlas
 if [ -z $1 ]; then 
 ansible-playbook  upstart.yaml --connection=local --tags primary,control
 else
