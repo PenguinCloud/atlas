@@ -6,6 +6,9 @@ cluster:
   build: k8s
   first: yes
   pod_cidr: 10.2.145.0/24
+  join:
+    hash: d8cgxo.2lzjp4fzh0od641f
+    token: sha256:928f6bcd9e132daa42debdb72441e271ee2bc592618bb4bcb8f1d0e29602d482
 db:
   ip: 10.2.144.9
   port: 3306
@@ -25,5 +28,3 @@ admin:
   email: justin@penguinzmedia.group
   username: pmg-admin
   password: Xgl&3wU^pY5&Y3Xe
-rancher:
-  port: 443

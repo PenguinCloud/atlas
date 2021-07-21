@@ -16,29 +16,21 @@
   vars_files:
     - vars/server.yaml
   tasks:
-    - name: Update and get container to standard point
-      include_tasks: 
-        file: jobs/initialize.yaml
-        apply:
-          tags:
-            - enviro
-      tags:
-        - enviro
-    - name: Setup local interface
-      include_tasks:
-        file: jobs/configure/local_interface.yaml
-        apply:
-          tags:
-            - enviro
-            - first
+    - name: Add cluster local dns info
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        line: "{{ cluster.ip }}  {{ cluster.fqdn }}"
+        create: yes
     - name: Install K3s
       include_tasks: 
         file: jobs/install/k3s.yaml
         apply:
           tags:
             - k3s
+            - initial
       tags:
         - k3s
+        - initial
       when: cluster.build == "k3s"
     - name: Install Kube Utils
       include_tasks: 
@@ -68,11 +60,11 @@
         apply:
           tags:
             - k8s
-            - first
+            - initial
       when: cluster.build == "k8s"
       tags:
         - k8s
-        - first
+        - initial
     - name: Configure Kubectl
       include_tasks: 
         file: jobs/configure/kubectl.yaml
@@ -113,11 +105,3 @@
             - helm
       tags:
         - helm
-    - name: Install Traefik Ingress Controller
-      include_tasks:
-        file: jobs/install/traefik.yaml
-        apply:
-          tags:
-            - traefik
-      tags:
-        - traefik
