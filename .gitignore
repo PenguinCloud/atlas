@@ -1,2 +1,7 @@
+.idea/
 *.pem
-install-dev.sh
+*secrets*
+*password*
+*.key
+*.crt
+/venv/
