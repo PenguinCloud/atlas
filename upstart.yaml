@@ -5,14 +5,6 @@
   remote_user: root
   roles:
     - kwoodson.yedit
-  vars_prompt:
-    - name: nextFreeIf
-      prompt: "What is the local interface without an ip or with a number higher than enp3s0?"
-      private: no
-      default: enp6s0
-    - name: localip
-      prompt: "What is the assigned local ip CIDR for your local net device (dont forget the net CIDR)?"
-      private: no
   vars_files:
     - vars/server.yaml
   tasks:
