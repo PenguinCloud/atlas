@@ -5,7 +5,10 @@ cd /opt/atlas
 git reset --hard
 git pull
 git clone git@code.penguinzmedia.group:pmg-build-standards/baseline-ansible-setup.git
-cd baseline-ansible-setup
+cd /opt/atlas
+cp -f configs/hosts.yaml /etc/ansible/hosts
+cp -f configs/hosts /etc/hosts
+cd /opt/baseline-ansible-setup
 chmod +x ./setup.sh
 ./setup.sh
 
