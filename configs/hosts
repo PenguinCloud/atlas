@@ -1,0 +1,8 @@
+127.0.0.1 localhost
+10.2.144.3 control1.penguinzmedia.group main-node-1.penguinzmedia.group main-node-1
+10.2.144.4 control2.penguinzmedia.group
+10.2.144.5 control3.penguinzmedia.group
+10.2.144.6 worker1.penguinzmedia.group
+10.2.144.7 worker2.penguinzmedia.group
+10.2.144.8 worker3.penguinzmedia.group
+10.2.144.9 cluster.penguinzmedia.group db.penguinzmedia.group

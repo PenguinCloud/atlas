@@ -1,0 +1,27 @@
+---
+all:
+  hosts:
+  children:
+    cluster:
+      hosts:
+      children:
+        control:
+          vars:
+            node:
+              type: control
+              primary: no
+          hosts:
+            localhost:
+              ansible_connection: local
+              ansible_python_interpreter: /usr/bin/env python3
+              vars:
+                node:
+                  primary: yes
+            control[2-3].penguinzmedia.group:
+        worker:
+          vars:
+            node:
+              type: worker
+          hosts:
+            worker[1-3].penguinzmedia.group:
+
