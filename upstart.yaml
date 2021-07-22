@@ -4,6 +4,9 @@
   become: yes
   strategy: linear
   gather_facts: False
+  serial:
+    - 1
+    - "100%"
   remote_user: root
   roles:
     - kwoodson.yedit
