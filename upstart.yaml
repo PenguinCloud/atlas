@@ -2,6 +2,8 @@
 - name: Install Kubernetes on cluster
   hosts: cluster
   become: yes
+  strategy: linear
+  forks: 3
   remote_user: root
   roles:
     - kwoodson.yedit
