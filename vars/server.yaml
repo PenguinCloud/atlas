@@ -1,6 +1,4 @@
 ---
-PriamryIf: enp1s0
-nextFreeIf: enp6s0
 cluster:
   ip: 10.2.144.9
   port: 6443
