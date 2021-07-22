@@ -19,10 +19,15 @@ all:
                 node:
                   primary: yes
             control[2:3].penguinzmedia.group:
+              vars:
+                node:
+                  type: control
+                  primary: no
         worker:
           vars:
             node:
               type: worker
+              primary: no
           hosts:
             worker[1:3].penguinzmedia.group:
 
