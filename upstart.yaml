@@ -3,7 +3,7 @@
   hosts: cluster
   become: yes
   strategy: linear
-  forks: 3
+  fork: 3
   remote_user: root
   roles:
     - kwoodson.yedit
