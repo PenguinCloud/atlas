@@ -15,21 +15,13 @@ all:
             localhost:
               ansible_connection: local
               ansible_python_interpreter: /usr/bin/env python3
-              vars:
-                node:
-                  primary: yes
+              localip: 10.2.144.3/24
+              node:
+                primary: yes
             control2.penguinzmedia.group:
-              vars:
-                localip: 10.2.144.4/24
-                node:
-                  type: control
-                  primary: no
+              localip: 10.2.144.4/24
             control3.penguinzmedia.group:
-              vars:
-                localip: 10.2.144.5/24
-                node:
-                  type: control
-                  primary: no
+              localip: 10.2.144.5/24
         worker:
           vars:
             node:
@@ -37,20 +29,8 @@ all:
               primary: no
           hosts:
             worker1.penguinzmedia.group:
-              vars:
-                localip: 10.2.144.6/24
-                node:
-                  type: worker
-                  primary: no
+              localip: 10.2.144.6/24
             worker2.penguinzmedia.group:
-              vars:
-                localip: 10.2.144.7/24
-                node:
-                  type: worker
-                  primary: no
+              localip: 10.2.144.7/24
             worker3.penguinzmedia.group:
-              vars:
-                localip: 10.2.144.8/24
-                node:
-                  type: worker
-                  primary: no
+              localip: 10.2.144.8/24
