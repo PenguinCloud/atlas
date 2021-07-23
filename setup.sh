@@ -31,7 +31,7 @@ cp -f configs/hosts /etc/hosts
 
 cd /opt/atlas
 if [ -z $1 ]; then 
-ansible-playbook  upstart.yaml --connection=local --tags primary,control
+ansible-playbook  upstart.yaml --tags primary,control
 else
-ansible-playbook  upstart.yaml --connection=local --tags $1
+ansible-playbook  upstart.yaml --tags $1
 fi
