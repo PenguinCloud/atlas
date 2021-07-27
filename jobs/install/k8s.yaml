@@ -24,10 +24,10 @@
 - name: Get results from prior install
   command: kubeadm token create --print-join-command
   register: kube_init
-  when: not kube_init.stdout_lines
+  when: not kube_init
 - name: results
   debug: var=kube_init.stdout_lines
-  when: kube_init.stdout_lines
+  when: kube_init
 - name: Copy the prior results somewhere... we'll wait a minute
   pause:
     minutes: 1
