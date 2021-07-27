@@ -9,7 +9,7 @@
     - primary
     - control
 - name: Initialize Secondary Control nodes
-  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --upload-certs --discovery-token-ca-cert-hash {{ k8shash }} --control-plane'
+  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash {{ k8shash }} --control-plane'
   register: kube_init
   when: not primary and k8type=="control" and not kube_file.stat.exists
   tags:
@@ -30,5 +30,8 @@
 - name: We'll make a copy just in case
   shell: echo '{{ kube_init.stdout }}' >> ~/mykubeinfo
   when: not kube_file.stat.exists
+- name: "If you need it, you can run kubeadm token create --print-join-command on the primary host!"
+  pause:
+    minutes: 1
 
   
