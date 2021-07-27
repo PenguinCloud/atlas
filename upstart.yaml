@@ -18,7 +18,7 @@
     - name: k8shash
       prompt: "What is the Join Hash? (leave blank on first run)"
     - name: k8scert
-        prompt: "What is the Join Cert? (leave blank on first run)"
+      prompt: "What is the Join Cert? (leave blank on first run)"
   tasks:
     - name: Add cluster local dns info
       ansible.builtin.lineinfile:
