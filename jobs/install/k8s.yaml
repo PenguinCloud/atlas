@@ -21,8 +21,13 @@
   when: k8type=="worker" and not kube_file.stat.exists
   tags:
     - worker
+- name: Get results from prior install
+  command: kubeadm token create --print-join-command
+  register: kube_init
+  when: not kube_init.stdout_lines
 - name: results
   debug: var=kube_init.stdout_lines
+  when: kube_init.stdout_lines
 - name: Copy the prior results somewhere... we'll wait a minute
   pause:
     minutes: 1
@@ -33,5 +38,6 @@
 - name: "If you need it, you can run kubeadm token create --print-join-command on the primary host!"
   pause:
     minutes: 1
+  when: not kube_file.stat.exists
 
   
