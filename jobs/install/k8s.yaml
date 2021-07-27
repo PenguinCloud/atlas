@@ -23,8 +23,7 @@
     - worker
 - name: results
   debug: 
-    var: kube_init
-    verbosity: 2
+    msg : " {{ kube_init.stdout }} "
 - name: Copy the prior results somewhere... we'll wait a minute
   pause:
     minutes: 1
