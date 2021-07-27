@@ -22,8 +22,7 @@
   tags:
     - worker
 - name: results
-  debug: 
-    msg : " {{ kube_init.stdout }} "
+  debug: var=kube_init.stdout_lines
 - name: Copy the prior results somewhere... we'll wait a minute
   pause:
     minutes: 1
