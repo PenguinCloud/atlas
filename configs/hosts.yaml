@@ -7,27 +7,32 @@ all:
       hosts:
       children:
         control:
-          vars:
-            k8type: control
-            primary: no
           hosts:
             localhost:
               ansible_connection: local
               ansible_python_interpreter: /usr/bin/env python3
               localip: 10.2.144.3/24
               primary: yes
+              k8type: control
             control2.penguinzmedia.group:
               localip: 10.2.144.4/24
+              primary: no
+              k8type: control
             control3.penguinzmedia.group:
               localip: 10.2.144.5/24
+              primary: no
+              k8type: control
         worker:
-          vars:
-            k8type: worker
-            primary: no
           hosts:
             worker1.penguinzmedia.group:
               localip: 10.2.144.6/24
+              primary: no
+              k8type: worker
             worker2.penguinzmedia.group:
               localip: 10.2.144.7/24
+              primary: no
+              k8type: worker
             worker3.penguinzmedia.group:
               localip: 10.2.144.8/24
+              primary: no
+              k8type: worker
