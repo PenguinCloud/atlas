@@ -1,5 +1,5 @@
 ---
-- stat: path=/etc/kubernetes/manifests/kube-controller-manager.yaml
+- stat: path=/etc/kubernetes/kubelet.conf
   register: kube_file
 - name: Initialize Primary Control node
   shell: 'kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs --pod-network-cidr={{ cluster.pod_cidr }} -v=9'
@@ -11,14 +11,14 @@
 - name: Initialize Secondary Control nodes
   shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash {{ k8shash }} --control-plane'
   register: kube_init
-  when: not primary and k8type=="control"
+  when: not primary and k8type=="control" and not kube_file.stat.exists
   tags:
     - secondary
     - control
 - name: Initialize Worker nodes
   shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash {{ k8shash }}'
   register: kube_init
-  when: k8type=="worker"
+  when: k8type=="worker" and not kube_file.stat.exists
   tags:
     - worker
 - name: results
