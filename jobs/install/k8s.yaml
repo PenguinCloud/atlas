@@ -1,8 +1,10 @@
 ---
+- stat: path=/etc/kubernetes/manifests/kube-controller-manager.yaml
+  register: kube_file
 - name: Initialize Primary Control node
   shell: 'kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs --pod-network-cidr={{ cluster.pod_cidr }} -v=9'
   register: kube_init
-  when: primary and k8type=="control"
+  when: primary and k8type=="control" and not kube_file.stat.exists
   tags:
     - primary
     - control
