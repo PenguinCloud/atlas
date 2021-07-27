@@ -9,7 +9,7 @@ all:
         control:
           vars:
             node:
-              type: control
+              k8type: control
               primary: no
           hosts:
             localhost:
@@ -25,7 +25,7 @@ all:
         worker:
           vars:
             node:
-              type: worker
+              k8type: worker
               primary: no
           hosts:
             worker1.penguinzmedia.group:

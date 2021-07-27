@@ -25,13 +25,13 @@ chmod +x ./setup.sh
 
 export KUBECONFIG=/root/.kube/config
 
-cd /opt/atlas
+
 cp -f configs/hosts.yaml /etc/ansible/hosts
 cp -f configs/hosts /etc/hosts
 
 cd /opt/atlas
 if [ -z $1 ]; then 
-ansible-playbook  upstart.yaml --tags primary,control
+ansible-playbook  upstart.yaml --tags primary,controlcat
 else
 ansible-playbook  upstart.yaml --tags $1
 fi
