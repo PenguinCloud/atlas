@@ -9,7 +9,7 @@
     - primary
     - control
 - name: Initialize Secondary Control nodes
-  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash {{ k8shash }} --control-plane'
+  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash {{ k8shash }} --control-plane --certificate-key {{ k8scert }}'
   register: kube_init
   when: not primary and k8type=="control" and not kube_file.stat.exists
   tags:
