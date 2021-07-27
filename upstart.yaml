@@ -68,6 +68,7 @@
         - k8s
         - initial
     - name: Configure Kubectl
+      when: k8type=="control"
       include_tasks: 
         file: jobs/configure/kubectl.yaml
         apply:
@@ -80,6 +81,7 @@
         - k3s
         - kctl
     - name: Install CNI
+      when: primary
       include_tasks:
         file: jobs/install/canal.yaml
         apply:
@@ -88,6 +90,7 @@
       tags:
         - k8s
     - name: Test Kubernetess
+      when: k8type=="control"
       include_tasks: 
         file: jobs/tests/kubernetes.yaml
         apply:
@@ -100,6 +103,7 @@
         - k3s
         - test
     - name: Install Helm
+      when: k8type=="control"
       include_tasks: 
         file: jobs/install/helm.yaml
         apply:
