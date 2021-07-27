@@ -24,8 +24,6 @@ chmod +x ./setup.sh
 export KUBECONFIG=/root/.kube/config
 
 
-cp -f configs/hosts.yaml /etc/ansible/hosts
-cp -f configs/hosts /etc/hosts
 
 cd /opt/atlas
 cp -f configs/hosts.yaml /etc/ansible/hosts
