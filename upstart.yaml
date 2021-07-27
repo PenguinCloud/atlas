@@ -51,17 +51,17 @@
             - /var/lib/kubelet/
             - /var/lib/etcd
       tags: resetkube, never
-    - name: Install k8s
-        include_tasks:
-          file: jobs/configure/k8s-secret.yaml
-          apply:
-            tags:
-              - k8s
-              - initial
-        when: cluster.build == "k8s"
-        tags:
-          - k8s
-          - initial
+    - name:  Get K8s Secrets
+      include_tasks:
+        file: jobs/configure/k8s-secret.yaml
+        apply:
+          tags:
+            - k8s
+            - initial
+      when: cluster.build == "k8s" and not primary
+      tags:
+        - k8s
+        - initial
     - name: Install k8s
       include_tasks: 
         file: jobs/install/k8s.yaml
