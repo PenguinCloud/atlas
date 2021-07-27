@@ -12,6 +12,11 @@
     - kwoodson.yedit
   vars_files:
     - vars/server.yaml
+  vars_prompt:
+    - name: k8stoken
+      prompt: "What is the Join Token? (leave blank on first run)"
+    - name: k8shash
+      prompt: "What is the Join Hash? (leave blank on first run)"
   tasks:
     - name: Add cluster local dns info
       ansible.builtin.lineinfile:

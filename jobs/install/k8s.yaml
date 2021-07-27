@@ -7,14 +7,14 @@
     - primary
     - control
 - name: Initialize Secondary Control nodes
-  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ cluster.join.token }} --discovery-token-ca-cert-hash {{ cluster.join.hash }} --control-plane'
+  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash {{ k8shash }} --control-plane'
   register: kube_init
   when: not primary and k8type=="control"
   tags:
     - secondary
     - control
 - name: Initialize Worker nodes
-  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ cluster.join.token }} --discovery-token-ca-cert-hash {{ cluster.join.hash }}'
+  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash {{ k8shash }}'
   register: kube_init
   when: k8type=="worker"
   tags:
