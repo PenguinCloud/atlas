@@ -1,4 +1,5 @@
 ---
+# TODO need to add a dynamic prompt instead of vars_prompt if this file doesnt exist
 - stat: path=/etc/kubernetes/kubelet.conf
   register: kube_file
 - name: Initialize Primary Control node
