@@ -15,9 +15,7 @@ else
 fi
 
 
-cd /opt/atlas
-cp -f configs/hosts.yaml /etc/ansible/hosts
-cp -f configs/hosts /etc/hosts
+
 cd /opt/baseline-ansible-setup
 chmod +x ./setup.sh
 ./setup.sh
@@ -30,6 +28,8 @@ cp -f configs/hosts.yaml /etc/ansible/hosts
 cp -f configs/hosts /etc/hosts
 
 cd /opt/atlas
+cp -f configs/hosts.yaml /etc/ansible/hosts
+cp -f configs/hosts /etc/hosts
 if [ -z $1 ]; then 
 ansible-playbook  upstart.yaml --tags primary,controlcat
 else
