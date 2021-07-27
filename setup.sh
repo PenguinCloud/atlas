@@ -26,8 +26,8 @@ export KUBECONFIG=/root/.kube/config
 
 
 cd /opt/atlas
-cp -f configs/hosts.yaml /etc/ansible/hosts
-cp -f configs/hosts /etc/hosts
+cp -f /opt/atlas/configs/hosts.yaml /etc/ansible/hosts
+cp -f /opt/atlas/configs/hosts /etc/hosts
 if [ -z $1 ]; then 
 ansible-playbook  upstart.yaml --tags primary,controlcat
 else
