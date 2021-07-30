@@ -1,15 +1,16 @@
 ---
 - name: Install Kubernetes on cluster
-  hosts: localhost
+  hosts: cluster
   become: yes
   strategy: linear
-  gather_facts: False
-  connection: local
+  serial:
+    - 1
+    - "50%"
+    - "100%"
   remote_user: root
-  roles:
-    - kwoodson.yedit
   vars_files:
     - vars/server.yaml
+    - vars/join-secrets.yml
   tasks:
     - name: Install K3s
       include_tasks:
