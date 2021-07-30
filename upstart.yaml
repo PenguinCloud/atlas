@@ -14,11 +14,6 @@
   roles:
     - kwoodson.yedit
   tasks:
-    - name: Install K3s
-      include_tasks:
-        file: "{{ playbook_dir }}/jobs/common.yaml"
-      tags:
-        - always
     - name: Add cluster local dns info
       ansible.builtin.lineinfile:
         path: /etc/hosts.yaml
