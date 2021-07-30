@@ -27,17 +27,6 @@ export KUBECONFIG=/root/.kube/config
 
 
 cd /opt/atlas
-FILE=vars/join-secrets.yml
-if [ -f "$FILE" ]; then
-    echo "$FILE exists. Assuming credentials."
-else
-    echo "$FILE does not exist. Creating skeleton."
-    echo "---" > vars/join-secrets.yml
-    echo "k8stoken:" >> vars/join-secrets.yml
-    echo "k8shash:" >> vars/join-secrets.yml
-    echo "k8scerts:" >> vars/join-secrets.yml
-fi
-
 cp -f /opt/atlas/configs/hosts.yaml /etc/ansible/hosts
 cp -f /opt/atlas/configs/hosts /etc/hosts
 if [ -z $1 ]; then
