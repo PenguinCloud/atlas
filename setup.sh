@@ -27,6 +27,7 @@ export KUBECONFIG=/root/.kube/config
 
 
 cd /opt/atlas
+touch vars/join-secrets.yml
 cp -f /opt/atlas/configs/hosts.yaml /etc/ansible/hosts
 cp -f /opt/atlas/configs/hosts /etc/hosts
 if [ -z $1 ]; then
