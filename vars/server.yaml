@@ -24,3 +24,4 @@ admin:
   email: justin@penguinzmedia.group
   username: pmg-admin
   password: Xgl&3wU^pY5&Y3Xe
+secretsFile: "{{ playbook_dir }}/vars/join-secrets.yml"
