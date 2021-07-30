@@ -27,13 +27,7 @@ export KUBECONFIG=/root/.kube/config
 
 
 cd /opt/atlas
-FILE=/opt/atlas/vars/
-if test -f "$FILE"; then
-    echo "$FILE exists, skipping."
-else
-    echo "creating blank credential file."
-    touch vars/join-secrets.yml
-fi
+
 cp -f /opt/atlas/configs/hosts.yaml /etc/ansible/hosts
 cp -f /opt/atlas/configs/hosts /etc/hosts
 if [ -z $1 ]; then
