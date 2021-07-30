@@ -35,8 +35,3 @@ else
 ansible-playbook  upstart.yaml --tags $1
 fi
 
-if [ -z $1 ]; then 
-ansible-playbook  cluster.yaml
-else
-ansible-playbook  cluster.yaml --tags $1
-fi
