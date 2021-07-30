@@ -41,4 +41,10 @@ ansible-playbook  upstart.yaml
 else
 ansible-playbook  upstart.yaml --tags $1
 fi
+echo "Now lets get to clustering! \n"
+if [ -z $1 ]; then
+ansible-playbook  cluster.yaml
+else
+ansible-playbook  cluster.yaml --tags $1
+fi
 
