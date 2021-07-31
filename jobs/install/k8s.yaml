@@ -1,26 +1,28 @@
 ---
 - stat: path=/etc/kubernetes/kubelet.conf
   register: kube_file
-- stat: path=/etc/kubernetes/manifests
-  register: kube_dir
+- file:
+    path: /etc/kubernetes/manifests
+    state: absent
+  when: not kube_file.stat.exists
 - name: Initialize Primary Control node
   shell: 'kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs --pod-network-cidr={{ cluster.pod_cidr }} -v=9'
   register: kube_init
-  when: primary and k8type=="control" and not kube_file.stat.exists and not kube_dir.stat.exists
+  when: primary and k8type=="control" and not kube_file.stat.exists
   tags:
     - primary
     - control
 - name: Initialize Secondary Control nodes
   shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash sha256:{{ k8shash }} --control-plane --certificate-key {{ k8scert }}'
   register: kube_init
-  when: not primary and k8type=="control" and not kube_file.stat.exists and not kube_dir.stat.exists
+  when: not primary and k8type=="control" and not kube_file.stat.exists
   tags:
     - secondary
     - control
 - name: Initialize Worker nodes
   shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash sha256:{{ k8shash }}'
   register: kube_init
-  when: k8type == "worker" and not kube_file.stat.exists and not kube_dir.stat.exists
+  when: k8type == "worker" and not kube_file.stat.exists
   tags:
     - worker
 
