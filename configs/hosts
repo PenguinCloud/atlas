@@ -1,8 +1,15 @@
-127.0.0.1 localhost
-10.2.144.3 control1.penguinzmedia.group main-node-1.penguinzmedia.group main-node-1
-10.2.144.4 control2.penguinzmedia.group
-10.2.144.5 control3.penguinzmedia.group
-10.2.144.6 worker1.penguinzmedia.group
-10.2.144.7 worker2.penguinzmedia.group
-10.2.144.8 worker3.penguinzmedia.group
+127.0.0.1    localhost
+10.2.144.3    control1.penguinzmedia.group
+10.2.144.4    control2.penguinzmedia.group
+10.2.144.5    control3.penguinzmedia.group
+10.2.144.6    worker1.penguinzmedia.group
+10.2.144.7    worker2.penguinzmedia.group
+10.2.144.8    worker3.penguinzmedia.group
 10.2.144.9 cluster.penguinzmedia.group db.penguinzmedia.group
+
+# The following lines are desirable for IPv6 capable hosts
+::1          localhost ip6-localhost ip6-loopback
+ff02::1      ip6-allnodes
+ff02::2      ip6-allrouters
+
+

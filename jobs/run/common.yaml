@@ -1,9 +1,17 @@
 ---
-- name: Add cluster local dns info
-  ansible.builtin.lineinfile:
-    path: /etc/hosts.yaml
-    line: "{{ cluster.ip }}  {{ cluster.fqdn }}"
-    create: yes
+- name: Install Cluster DNS
+  include_tasks:
+    file: jobs/install/dns.yaml
+    apply:
+      tags:
+        - k3s
+        - initial
+        - always
+  tags:
+    - k3s
+    - initial
+    - always
+  when: cluster.build == "k3s"
 - name: Install K3s
   include_tasks:
     file: jobs/install/k3s.yaml
