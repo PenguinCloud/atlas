@@ -4,9 +4,10 @@
     state: directory
     path: "/root/.kube"
 - name: Grab a copy of the admin config
-  ansible.builtin.fetch:
+  copy:
     src: /etc/kubernetes/admin.conf
     dest: "{{ playbook_dir }}/configs/admin.conf"
+    remote_src: yes
   when: cluster.build == "k8s" and primary
 - name: Copy k3s Config
   ansible.builtin.copy:
