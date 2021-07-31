@@ -1,4 +1,11 @@
 ---
+- name: Make sure user k8s config dir exists
+  file:
+    state: directory
+    path: "{{ item }}"
+  loop:
+    - "{{ k8s.config }}"
+    - "{{ k3s.config }}"
 - name: Copy k3s Config
   ansible.builtin.copy:
     src:  "{{ k3s.config }}"
