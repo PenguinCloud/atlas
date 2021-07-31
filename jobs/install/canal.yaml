@@ -1,8 +1,10 @@
 ---
-- stat: path=/etc/kubernetes/kubelet.conf
-  register: kube_file
+- name: Get a list of all pods from any namespace
+  community.kubernetes.k8s_info:
+    kind: Pod
+  register: pod_list
 - name: Apply canal manifest to the cluster.
   community.kubernetes.k8s:
     state: present
     src: "{{ playbook_dir }}/configs/canal.yaml"
-  when: primary and not kube_file.stat.exists
+  when: primary and not pod_list.find("canal")
