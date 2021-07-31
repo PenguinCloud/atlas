@@ -81,6 +81,7 @@
         - k8s
   tags:
     - k8s
+    - never
 - name: Test Kubernetess
   when: k8type == "control"
   include_tasks:
