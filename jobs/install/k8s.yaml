@@ -5,6 +5,9 @@
     path: /etc/kubernetes/manifests
     state: absent
   when: not kube_file.stat.exists
+- name: Pull images
+  shell: kubeadm config images pull'
+  when: not primary and k8type=="control"
 - name: Initialize Primary Control node
   shell: 'kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs --pod-network-cidr={{ cluster.pod_cidr }} -v=9'
   register: kube_init
