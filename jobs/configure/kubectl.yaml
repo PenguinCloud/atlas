@@ -3,6 +3,11 @@
   file:
     state: directory
     path: "/root/.kube"
+- name: Grab a copy of the admin config
+  ansible.builtin.fetch:
+    src: /etc/kubernetes/admin.conf
+    dest: "{{ playbook_dir }}/configs/admin.conf"
+  when: cluster.build == "k3s" and primary
 - name: Copy k3s Config
   ansible.builtin.copy:
     src:  "{{ k3s.config }}"
@@ -12,11 +17,11 @@
   when: cluster.build == "k3s"
 - name: Copy k8s Config
   ansible.builtin.copy:
-    src:  "{{ k8s.config }}"
+    src:  "{{ playbook_dir }}/configs/admin.conf"
     dest: "{{ user.config }}"
     remote_src: yes
     backup: yes
-  when: cluster.build == "k8s"
+  when: cluster.build == "k8s" and not primary and k8type == "control"
 - name: Make user kube config only for root's eyes
   ansible.builtin.file:
     path: /root/.kube/config
