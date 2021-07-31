@@ -7,7 +7,7 @@
   ansible.builtin.fetch:
     src: /etc/kubernetes/admin.conf
     dest: "{{ playbook_dir }}/configs/admin.conf"
-  when: cluster.build == "k3s" and primary
+  when: cluster.build == "k8s" and primary
 - name: Copy k3s Config
   ansible.builtin.copy:
     src:  "{{ k3s.config }}"
