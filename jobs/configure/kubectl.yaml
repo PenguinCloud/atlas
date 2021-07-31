@@ -20,7 +20,6 @@
   ansible.builtin.copy:
     src:  "{{ playbook_dir }}/configs/admin.conf"
     dest: "{{ user.config }}"
-    remote_src: yes
     backup: yes
   when: cluster.build == "k8s" and not primary and k8type == "control"
 - name: Make user kube config only for root's eyes
