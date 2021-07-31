@@ -4,7 +4,6 @@
   become: yes
   strategy: linear
   serial:
-    - 1
     - "50%"
     - "100%"
   remote_user: root
