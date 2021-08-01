@@ -42,6 +42,19 @@
         - /var/lib/kubelet/
         - /var/lib/etcd
   tags: resetkube, never
+- name: Configure Kubectl
+  when: k8type == "control" and not primary
+  include_tasks:
+    file: jobs/configure/kubectl.yaml
+    apply:
+      tags:
+        - k8s
+        - k3s
+        - kctl
+  tags:
+    - k8s
+    - k3s
+    - kctl
 - name: Install k8s
   include_tasks:
     file: jobs/install/k8s.yaml
@@ -65,7 +78,7 @@
     - k8s
     - initial
 - name: Configure Kubectl
-  when: k8type == "control"
+  when: k8type == "control" and primary
   include_tasks:
     file: jobs/configure/kubectl.yaml
     apply:

@@ -3,6 +3,7 @@
   file:
     state: directory
     path: "/root/.kube"
+
 - name: Grab a copy of the admin config
   copy:
     src: /etc/kubernetes/admin.conf
