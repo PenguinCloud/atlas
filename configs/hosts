@@ -5,7 +5,10 @@
 10.2.144.6    worker1.penguinzmedia.group
 10.2.144.7    worker2.penguinzmedia.group
 10.2.144.8    worker3.penguinzmedia.group
-10.2.144.9 cluster.penguinzmedia.group db.penguinzmedia.group
+10.2.144.9     cluster.penguinzmedia.group code.penguinzmedia.group db.penguinzmedia.group
+10.2.144.11    etc1.penguinzmedia.group etc1
+10.2.144.12    etc2.penguinzmedia.group etc2
+10.2.144.13    etc3.penguinzmedia.group etc3
 
 # The following lines are desirable for IPv6 capable hosts
 ::1          localhost ip6-localhost ip6-loopback
