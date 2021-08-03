@@ -12,7 +12,7 @@ if test -f "$FILE"; then
     git pull
 else
     cd /opt
-    git clone git@code.penguinzmedia.group:pmg-build-standards/baseline-ansible-setup.git
+    git clone git@code.penguinzmedia.group:222/pmg-build-standards/baseline-ansible-setup.git
 fi
 
 
