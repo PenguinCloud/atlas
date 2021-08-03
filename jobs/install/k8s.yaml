@@ -9,14 +9,14 @@
   shell: kubeadm config images pull
   when: not primary and k8type=="control"
 - name: Initialize Primary Control node
-  shell: 'kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs --pod-network-cidr={{ cluster.pod_cidr }} -v=9'
+  shell: 'kubeadm init --control-plane-endpoint "{{ cluster.ip }}:{{ cluster.port }}" --upload-certs --pod-network-cidr={{ cluster.pod_cidr }} -v=9 --etcd-servers={{ db.ip }}:2379'
   register: kube_init
   when: primary and k8type=="control" and not kube_file.stat.exists
   tags:
     - primary
     - control
 - name: Initialize Secondary Control nodes
-  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash sha256:{{ k8shash }} --control-plane --certificate-key {{ k8scert }}'
+  shell: 'kubeadm join {{ cluster.ip }}:{{ cluster.port }} --token {{ k8stoken }} --discovery-token-ca-cert-hash sha256:{{ k8shash }} --control-plane --certificate-key {{ k8scert }} --etcd-servers={{ db.ip }}:2379'
   register: kube_init
   when: not primary and k8type=="control" and not kube_file.stat.exists
   tags:
