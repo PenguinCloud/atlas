@@ -2,11 +2,11 @@
 additionalArguments:
   - --providers.file.filename=/data/traefik-config.yaml
   - --entrypoints.websecure.http.tls.certresolver=cloudflare
-  - --entrypoints.websecure.http.tls.domains[0].main=penguinzmedia.group
-  - --entrypoints.websecure.http.tls.domains[0].sans=*.penguinzmedia.group
+  - --entrypoints.websecure.http.tls.domains[0].main={{ dns.fqdn.base }}
+  - --entrypoints.websecure.http.tls.domains[0].sans=*.{{ dns.fqdn.base }}
   - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
   - --certificatesresolvers.cloudflare.acme.email=justin@penguinzmedia.group
-  - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1
+  - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers={{ dns.resolver }}
   - --certificatesresolvers.cloudflare.acme.storage=/certs/acme.json
 nodeSelector:
   node-type: master

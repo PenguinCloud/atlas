@@ -6,8 +6,8 @@ metadata:
   namespace: traefik
 type: Opaque
 stringData:
-  email: justin@penguinzmedia.group
-  apiKey: YP0R4mySBFr4K_IPyJRy5KMJe-mMmBuFe_2-uO5j
+  email: {{ admin.email }}
+  apiKey:{{ dns.cloudflare.apikey }}
 ---
 apiVersion: v1
 kind: ConfigMap

@@ -1,7 +1,0 @@
----
-- name: "Make sure we have cluster DNS ready!"
-  copy:
-    src: "{{ playbook_dir }}/configs/hosts"
-    dest: /etc/hosts
-    force: yes
-    backup: yes

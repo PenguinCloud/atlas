@@ -8,7 +8,7 @@
     - "100%"
   remote_user: root
   vars_files:
-    - vars/server.yaml
+    - vars/base.yaml
     - vars/join-secrets.yml
   roles:
     - kwoodson.yedit

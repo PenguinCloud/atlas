@@ -2,7 +2,7 @@
 cluster:
   ip: 10.2.144.9
   port: 6443
-  fqdn: cluster.penguinzmedia.group
+  fqdn: cluster.penguintech.group
   build: k8s
   pod_cidr: 10.2.145.0/24
 db:
@@ -25,3 +25,8 @@ admin:
   username: pmg-admin
   password: Xgl&3wU^pY5&Y3Xe
 secretsFile: "{{ playbook_dir }}/vars/join-secrets.yml"
+dns:
+  cloudflare:
+    apikey:
+  fqdn:
+    base:
