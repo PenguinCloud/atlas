@@ -6,5 +6,5 @@
 - name: Apply canal manifest to the cluster.
   community.kubernetes.k8s:
     state: present
-    src: "{{ playbook_dir }}/configs/canal.yaml"
+    src: "{{ playbook_dir }}/configs/canal.yml"
   when: primary and not "canal" in pod_list

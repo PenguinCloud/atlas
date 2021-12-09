@@ -1,13 +1,135 @@
 ---
-- name: Install Kubernetes on Primary Control Node
-  hosts: localhost
+- name: Install Kubernetes on cluster
+  hosts: cluster
   become: yes
-  connection: local
+  strategy: linear
+  serial:
+    - 3
+    - "100%"
+  remote_user: root
   vars_files:
     - vars/base.yaml
+    - vars/join-secrets.yml
   tasks:
-    - name: Initiate Tasks
+    - name: Install Cluster DNS
       include_tasks:
-        file: jobs/run/common.yaml
+        file: jobs/install/dns.yml
+        apply:
+          tags:
+            - initial
+            - always
       tags:
+        - initial
         - always
+    - name: Install K3s
+      include_tasks:
+        file: jobs/install/k3s.yml
+        apply:
+          tags:
+            - k3s
+            - initial
+      tags:
+        - k3s
+        - initial
+      when: cluster.build == "k3s"
+    - name: Install Kube Utils
+      include_tasks:
+        file: jobs/install/kubeutils.yml
+        apply:
+          tags:
+            - enviro
+      tags:
+        - enviro
+    - name: reset kubeadm
+      block:
+        - name: Reset kubeadm
+          shell: kubeadm reset
+          ignore_errors: yes
+        - name: Delete paths
+          file:
+            state: absent
+            path: " {{ item }}"
+          loop:
+            - /etc/kubernetes/
+            - /var/lib/kubelet/
+            - /var/lib/etcd
+      tags: resetkube, never
+    - name: Configure Kubectl
+      when: k8type == "control" and not primary
+      include_tasks:
+        file: jobs/configure/kubectl.yml
+        apply:
+          tags:
+            - k8s
+            - k3s
+            - kctl
+      tags:
+        - k8s
+        - k3s
+        - kctl
+    - name: Install k8s
+      include_tasks:
+        file: jobs/install/k8s.yml
+        apply:
+          tags:
+            - k8s
+            - initial
+      when: cluster.build == "k8s"
+      tags:
+        - k8s
+        - initial
+    - name:  Get K8s Secrets
+      include_tasks:
+        file: jobs/configure/k8s-secrets.yml
+        apply:
+          tags:
+            - k8s
+            - initial
+      when: cluster.build == "k8s" and primary
+      tags:
+        - k8s
+        - initial
+    - name: Configure Kubectl
+      when: k8type == "control" and primary
+      include_tasks:
+        file: jobs/configure/kubectl.yml
+        apply:
+          tags:
+            - k8s
+            - k3s
+            - kctl
+      tags:
+        - k8s
+        - k3s
+        - kctl
+    - name: Install CNI
+      when: primary
+      include_tasks:
+        file: jobs/install/canal.yml
+        apply:
+          tags:
+            - k8s
+      tags:
+        - k8s
+    - name: Test Kubernetess
+      when: k8type == "control"
+      include_tasks:
+        file: jobs/tests/kubernetes.yaml
+        apply:
+          tags:
+            - k8s
+            - k3s
+            - test
+      tags:
+        - k8s
+        - k3s
+        - test
+    - name: Install Helm
+      when: k8type == "control"
+      include_tasks:
+        file: jobs/install/helm.yml
+        apply:
+          tags:
+            - helm
+      tags:
+        - helm

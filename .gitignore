@@ -4,4 +4,7 @@
 *password*
 *.key
 *.crt
-/venv/
+venv/
+*.yaml
+id*
+*.json

@@ -3888,6 +3888,6 @@ spec:
 # Source: calico/templates/calico-typha.yaml
 
 ---
-# Source: calico/templates/configure-canal.yaml
+# Source: calico/templates/configure-canal.yml
 
 
